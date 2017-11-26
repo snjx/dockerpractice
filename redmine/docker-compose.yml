@@ -1,0 +1,31 @@
+version: "3.3"
+#永続化のためのボリュームを作成
+volumes:
+  mariadb:
+  vendor:
+services:
+  # DB
+  redminedb:
+    image: mariadb:10.1.16
+    volumes:
+      - mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=redmine
+      - TZ='Asia/Tokyo'
+  # rails アプリケーション
+  redmineapp:
+    build: .
+    container_name: "railsdev"
+    environment:
+      RAILS_ENV: development
+      TZ: 'Asia/Tokyo'
+    ports:
+      - "3000:3000"
+    volumes:
+      - "$PWD/redmine:/var/lib/redmine"
+      - "$PWD/database.yml:/var/lib/redmine/config/database.yml"
+      # named volumeは一番最後じゃないとだめかもしれない。
+      - vendor:/var/lib/redmine/vendor
+    depends_on:
+      - redminedb
