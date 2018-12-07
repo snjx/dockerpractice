@@ -36,3 +36,9 @@ REDMINE_LANG=ja bundle exec rake redmine:load_default_data
 	192.168.99.100
 	```
 	ならば、http://192.168.99.100:3000/ となる。
+
+# 備考
+
+Dockerfileに改善の余地あり。  
+最後にinitをキックしているけど、これ多分、今だとうまく動かない。はず。  
+
