@@ -16,12 +16,12 @@
 	```
 
 3. Redmineをセットアップ。
-```
-bundle install --without development test --path vendor/bundle
-bundle exec rake generate_secret_token
-bundle exec rake db:migrate
-REDMINE_LANG=ja bundle exec rake redmine:load_default_data
-```
+	```
+	bundle install --without development test --path vendor/bundle
+	bundle exec rake generate_secret_token
+	bundle exec rake db:migrate
+	REDMINE_LANG=ja bundle exec rake redmine:load_default_data
+	```
 
 4. Redmineサーバを起動する。  
 	（`-b`つけないと、host側からのアクセスに答えてくれない）  
